@@ -75,9 +75,6 @@ def main():
 
     user_question = st.text_input("Ask a Question from the PDF Files", key="user_question")
 
-    if user_question and api_key:  # Ensure API key and user question are provided
-        user_input(user_question, api_key)
-
     with st.sidebar:
         st.title("Menu:")
         pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, key="pdf_uploader")
@@ -87,6 +84,9 @@ def main():
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks, api_key)
                 st.success("Done")
+
+    if user_question and api_key:  # Ensure API key and user question are provided
+        user_input(user_question, api_key)
 
 if __name__ == "__main__":
     main()
